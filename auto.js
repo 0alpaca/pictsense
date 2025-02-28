@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Pictsense Image Drawer
+// @name         自動描画
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  Draw images on Pictsense using user script
-// @author       You
+// @author       あるぱか
 // @match        https://pictsense.com/*
 // @grant        none
 // ==/UserScript==
@@ -21,6 +21,18 @@
     fileInput.style.zIndex = '1000';
     document.body.appendChild(fileInput);
 
+    // Create range input for scaling
+    const scaleInput = document.createElement('input');
+    scaleInput.type = 'range';
+    scaleInput.min = '1';
+    scaleInput.max = '100';
+    scaleInput.value = '100';
+    scaleInput.style.position = 'fixed';
+    scaleInput.style.top = '40px';
+    scaleInput.style.left = '10px';
+    scaleInput.style.zIndex = '1000';
+    document.body.appendChild(scaleInput);
+
     // Image loading and canvas setup
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -33,7 +45,7 @@
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
-                const scale = Math.min(320 / img.width, 320 / img.height);
+                const scale = Math.min(320 / img.width, 320 / img.height) * (scaleInput.value / 100);
                 canvas.width = img.width * scale;
                 canvas.height = img.height * scale;
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
