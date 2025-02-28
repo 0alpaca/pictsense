@@ -11,6 +11,9 @@
 (function() {
     'use strict';
 
+    const transparency;
+    // 透明度 小数点第16までの0~1
+
     // Create file input for image upload
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -99,7 +102,7 @@
             if (index >= strokeXY.length) return;
             const [start, end] = strokeXY[index];
             const color = getColorAt(start[0], start[1]);
-            socket.emit('stroke send', penSize, color, 1, [start, end]);
+            socket.emit('stroke send', penSize, color, transparency, [start, end]);
             index++;
             setTimeout(sendNextStroke, 190);
         }
