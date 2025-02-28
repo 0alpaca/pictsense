@@ -50,7 +50,7 @@
     });
 
     function processImageData(imageData) {
-        const penSize = 10; // Set pen size
+        const penSize = 3; // Set pen size
         const strokeXY = [];
         const width = imageData.width;
         const height = imageData.height;
