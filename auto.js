@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         自動描画
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  Draw images on Pictsense using user script
 // @author       あるぱか
 // @match        https://pictsense.com/*
@@ -33,6 +33,18 @@
     scaleInput.style.zIndex = '1000';
     document.body.appendChild(scaleInput);
 
+    // Create range input for pen size
+    const penSizeInput = document.createElement('input');
+    penSizeInput.type = 'range';
+    penSizeInput.min = '1';
+    penSizeInput.max = '30';
+    penSizeInput.value = '3';
+    penSizeInput.style.position = 'fixed';
+    penSizeInput.style.top = '70px';
+    penSizeInput.style.left = '10px';
+    penSizeInput.style.zIndex = '1000';
+    document.body.appendChild(penSizeInput);
+
     // Image loading and canvas setup
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -59,7 +71,7 @@
     });
 
     function processImageData(imageData) {
-        const penSize = 3; // Set pen size
+        const penSize = parseInt(penSizeInput.value, 10); // Set pen size from input
         const strokeXY = [];
         const width = imageData.width;
         const height = imageData.height;
