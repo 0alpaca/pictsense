@@ -1,15 +1,12 @@
 // ==UserScript==
-// @name         画像を自動で描画
+// @name         Pictsense Image Drawer
 // @namespace    http://tampermonkey.net/
 // @version      1.4
-// @description  自動描画
-// @author       あるぱか
+// @description  Draw images on Pictsense using user script
+// @author       You
 // @match        https://pictsense.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=pictsense.com
 // @grant        none
-// @license MIT
 // ==/UserScript==
-
 
 (function() {
     'use strict';
@@ -69,7 +66,10 @@
                 const b = data[index + 2];
                 const a = data[index + 3];
 
-                if (a === 0) continue; // Skip transparent pixels
+                if (a === 0) {
+                    prevColor = null;
+                    continue; // Skip transparent pixels
+                }
 
                 const color = (r << 16) + (g << 8) + b;
 
