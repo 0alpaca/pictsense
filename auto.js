@@ -1,12 +1,15 @@
 // ==UserScript==
-// @name         Pictsense Image Drawer
+// @name         画像を自動で描画
 // @namespace    http://tampermonkey.net/
 // @version      1.4
-// @description  Draw images on Pictsense using user script
-// @author       You
+// @description  自動描画
+// @author       あるぱか
 // @match        https://pictsense.com/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=pictsense.com
 // @grant        none
+// @license MIT
 // ==/UserScript==
+
 
 (function() {
     'use strict';
@@ -47,7 +50,7 @@
     });
 
     function processImageData(imageData) {
-        const penSize = 3; // Set pen size
+        const penSize = 10; // Set pen size
         const strokeXY = [];
         const width = imageData.width;
         const height = imageData.height;
@@ -98,7 +101,7 @@
             const color = getColorAt(start[0], start[1]);
             socket.emit('stroke send', penSize, color, 1, [start, end]);
             index++;
-            setTimeout(sendNextStroke, 200);
+            setTimeout(sendNextStroke, 190);
         }
 
         sendNextStroke();
