@@ -2,10 +2,10 @@
 // @name         自動描画
 // @namespace    http://tampermonkey.net/
 // @version      1.0.0
-// @description  try to take over the world!
+// @description  自動で描画する
 // @author       あるぱか
 // @match        https://pictsense.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=pictsense.com
+// @icon         https://img.icons8.com/?size=100&id=NP2HKyKwWrzn&format=png&color=000000
 // @grant        none
 // ==/UserScript==
 
@@ -67,6 +67,7 @@
 
         '#menuE > input,#menuE > button{'+
         'margin-top: 20px;'+
+        'padding: 0;'+
         '}'+
 
         '#menuE > input[type="file"]{'+
@@ -76,8 +77,8 @@
         'margin-bottom: 10px;'+
         'background-color: #009CFF;'+
         'border-radius: 1em;'+
+        'padding: 5px;'+
         '}'+
-
 
         '::file-selector-button {'+
         'display: block;'+
@@ -109,8 +110,7 @@
     let menuOn = false;
 
 
-
-
+    // メニューのエレメント
     const menuElement = document.querySelector("#menuE");
 
     // Create file input for image upload
